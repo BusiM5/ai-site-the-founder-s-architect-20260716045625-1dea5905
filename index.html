@@ -265,11 +265,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 
-<style id="ai-site-theme-widget-style">
+<style id="ai-site-theme-widget-style" data-ai-site-theme-version="3">
   :root {
     --ai-text: #102033;
     --ai-background: #f8fbff;
     --ai-highlight: #0f9f96;
+    --ai-highlight-deep: #0b746e;
+    --ai-highlight-soft: #39aaa2;
+    --ai-on-highlight: #ffffff;
   }
   body {
     color: var(--ai-text) !important;
@@ -294,14 +297,56 @@
   .badge,
   .service-icon,
   button[type="submit"] {
-    background-color: var(--ai-highlight) !important;
+    background: var(--ai-highlight) !important;
     border-color: var(--ai-highlight) !important;
+    color: var(--ai-on-highlight) !important;
   }
   .hero,
+  .hero-section,
   .about-gradient,
   .cta-band,
   .ai-generated-hero-image {
-    background-color: var(--ai-highlight);
+    background: linear-gradient(
+      135deg,
+      var(--ai-highlight-deep) 0%,
+      var(--ai-highlight) 52%,
+      var(--ai-highlight-soft) 100%
+    ) !important;
+    color: var(--ai-on-highlight) !important;
+  }
+  :is(.hero, .hero-section, .about-gradient, .cta-band, .ai-generated-hero-image)
+  :is(h1, h2, h3, h4, h5, h6, p, .hero-title, .hero-text, .hero-badge, .section-kicker) {
+    color: var(--ai-on-highlight) !important;
+  }
+  :is(.hero, .hero-section, .about-gradient, .cta-band, .ai-generated-hero-image)
+  :is(.floating-chip, .fact, .btn-light) {
+    color: var(--ai-text) !important;
+  }
+  :is(.hero, .hero-section, .about-gradient, .cta-band, .ai-generated-hero-image)
+  :is(.btn-outline-light, .contact-pill) {
+    color: var(--ai-on-highlight) !important;
+    border-color: var(--ai-on-highlight) !important;
+  }
+  .hero-title,
+  .hero-card,
+  .hero-card-body,
+  .hero-card-body :is(h1, h2, h3, h4, h5, h6, p),
+  .floating-chip {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .floating-chip {
+    white-space: normal;
+    text-align: left;
+  }
+  :is(.hero-card, .hero-image, .ai-generated-hero-image)
+  img[src^="data:image/svg+xml;base64,"] {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 3 / 2 !important;
+    object-fit: contain !important;
   }
   .floating-chip,
   .fact,
@@ -375,7 +420,7 @@
 
         <div class="col-lg-5">
           <div class="hero-card hero-visual">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjAwJyBoZWlnaHQ9JzgwMCcgdmlld0JveD0nMCAwIDEyMDAgODAwJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J2JnJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZWNmZWZmJy8+PHN0b3Agb2Zmc2V0PScwLjU1JyBzdG9wLWNvbG9yPScjZjhmYWZjJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjZWVmMmZmJy8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9J2FjY2VudCcgeDE9JzAnIHkxPScwJyB4Mj0nMScgeTI9JzEnPjxzdG9wIG9mZnNldD0nMCcgc3RvcC1jb2xvcj0nIzBmOWY5NicvPjxzdG9wIG9mZnNldD0nMScgc3RvcC1jb2xvcj0nIzFkOWJmMCcvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0nc2hhZG93JyB4PSctMjAlJyB5PSctMjAlJyB3aWR0aD0nMTQwJScgaGVpZ2h0PScxNDAlJz48ZmVEcm9wU2hhZG93IGR4PScwJyBkeT0nMjgnIHN0ZERldmlhdGlvbj0nMjYnIGZsb29kLWNvbG9yPScjMGYxNzJhJyBmbG9vZC1vcGFjaXR5PScwLjE4Jy8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPScxMjAwJyBoZWlnaHQ9JzgwMCcgZmlsbD0ndXJsKCNiZyknLz48Y2lyY2xlIGN4PSc5NzAnIGN5PScxNzAnIHI9JzIxMCcgZmlsbD0nIzBmOWY5Nicgb3BhY2l0eT0nMC4xMycvPjxjaXJjbGUgY3g9JzE4MCcgY3k9JzY1MCcgcj0nMjUwJyBmaWxsPScjMWQ5YmYwJyBvcGFjaXR5PScwLjEwJy8+PHJlY3QgeD0nODgnIHk9Jzk2JyB3aWR0aD0nMTAyNCcgaGVpZ2h0PSc2MDgnIHJ4PSc0MicgZmlsbD0nI2ZmZmZmZicgb3BhY2l0eT0nMC43OCcgZmlsdGVyPSd1cmwoI3NoYWRvdyknLz48cmVjdCB4PScxMzgnIHk9JzE1OCcgd2lkdGg9JzQyNicgaGVpZ2h0PSczMDAnIHJ4PSczMCcgZmlsbD0ndXJsKCNhY2NlbnQpJyBvcGFjaXR5PScwLjk1Jy8+PHBhdGggZD0nTTE4OCAzODggQzI3NSAzMDIgMzU3IDQyNiA0MzggMzI2IEM0ODIgMjcyIDUyNCAyNzggNTYwIDIzOCcgZmlsbD0nbm9uZScgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScyNCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBvcGFjaXR5PScwLjc0Jy8+PGNpcmNsZSBjeD0nMjU2JyBjeT0nMjQ2JyByPSc0OCcgZmlsbD0nd2hpdGUnIG9wYWNpdHk9JzAuODUnLz48cmVjdCB4PSc2MjYnIHk9JzE3NCcgd2lkdGg9JzM3MicgaGVpZ2h0PSczNCcgcng9JzE3JyBmaWxsPScjMGY5Zjk2JyBvcGFjaXR5PScwLjIwJy8+PHJlY3QgeD0nNjI2JyB5PScyNTAnIHdpZHRoPSc0MzYnIGhlaWdodD0nMjYnIHJ4PScxMycgZmlsbD0nIzBmMTcyYScgb3BhY2l0eT0nMC4xMCcvPjxyZWN0IHg9JzYyNicgeT0nMzA0JyB3aWR0aD0nMzI4JyBoZWlnaHQ9JzI2JyByeD0nMTMnIGZpbGw9JyMwZjE3MmEnIG9wYWNpdHk9JzAuMTAnLz48cmVjdCB4PSc2MjYnIHk9JzU0NCcgd2lkdGg9JzE5MicgaGVpZ2h0PSc1OCcgcng9JzI5JyBmaWxsPSd1cmwoI2FjY2VudCknLz48dGV4dCB4PSc2MjYnIHk9JzE5NycgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzIyJyBmb250LXdlaWdodD0nODAwJyBmaWxsPScjMGY5Zjk2Jz5BY2NvdW50aW5nIGluIER1cmJhbiwgU291dGggQWZyaWNhPC90ZXh0Pjx0ZXh0IHg9JzYyNicgeT0nNDA4JyBmb250LWZhbWlseT0nQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nNTQnIGZvbnQtd2VpZ2h0PSc4MDAnIGZpbGw9JyMxMDIwMzMnPlRoZSBGb3VuZGVyJiN4Mjc7cyBBcmNoaXRlY3Q8L3RleHQ+PHRleHQgeD0nNjI2JyB5PSc0NzInIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZm9udC1zaXplPScyOCcgZm9udC13ZWlnaHQ9JzYwMCcgZmlsbD0nIzQ3NTQ2Nyc+QWNjb3VudGluZyB8IDE3IEVyc2tpbmUgVGVycmFjZSwgQWRkaW5ndG9uIEJlYWNoLCBEdXJiYW4sIDQwMDEsIFNvdXRoIEFmcmljYTwvdGV4dD48L3N2Zz4=" alt="Generated banner image for The Founder&#x27;s Architect">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjAwJyBoZWlnaHQ9JzgwMCcgdmlld0JveD0nMCAwIDEyMDAgODAwJyByb2xlPSdpbWcnPjxtZXRhZGF0YSBpZD0nYWktc2l0ZS1mYWxsYmFjay1pbWFnZS12Mic+MjwvbWV0YWRhdGE+PHRpdGxlPlRoZSBGb3VuZGVyJ3MgQXJjaGl0ZWN0IHwgQWNjb3VudGluZyBpbiBEdXJiYW4sIFNvdXRoIEFmcmljYSB8IEFjY291bnRpbmcgfCAxNyBFcnNraW5lIFRlcnJhY2UsIEFkZGluZ3RvbiBCZWFjaCwgRHVyYmFuLCA0MDAxLCBTb3V0aCBBZnJpY2E8L3RpdGxlPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmcnIHgxPScwJyB5MT0nMCcgeDI9JzEnIHkyPScxJz48c3RvcCBvZmZzZXQ9JzAnIHN0b3AtY29sb3I9JyNlY2ZlZmYnLz48c3RvcCBvZmZzZXQ9JzAuNTUnIHN0b3AtY29sb3I9JyNmOGZhZmMnLz48c3RvcCBvZmZzZXQ9JzEnIHN0b3AtY29sb3I9JyNlZWYyZmYnLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0nYWNjZW50JyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3AgZGF0YS1haS1jb2xvcj0naGlnaGxpZ2h0JyBvZmZzZXQ9JzAnIHN0b3AtY29sb3I9JyMwZjlmOTYnLz48c3RvcCBkYXRhLWFpLWNvbG9yPSdoaWdobGlnaHQtc29mdCcgb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMWQ5YmYwJy8+PC9saW5lYXJHcmFkaWVudD48ZmlsdGVyIGlkPSdzaGFkb3cnIHg9Jy0yMCUnIHk9Jy0yMCUnIHdpZHRoPScxNDAlJyBoZWlnaHQ9JzE0MCUnPjxmZURyb3BTaGFkb3cgZHg9JzAnIGR5PScyOCcgc3RkRGV2aWF0aW9uPScyNicgZmxvb2QtY29sb3I9JyMwZjE3MmEnIGZsb29kLW9wYWNpdHk9JzAuMTgnLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9JzEyMDAnIGhlaWdodD0nODAwJyBmaWxsPSd1cmwoI2JnKScvPjxjaXJjbGUgZGF0YS1haS1jb2xvcj0naGlnaGxpZ2h0JyBjeD0nOTcwJyBjeT0nMTcwJyByPScyMTAnIGZpbGw9JyMwZjlmOTYnIG9wYWNpdHk9JzAuMTMnLz48Y2lyY2xlIGRhdGEtYWktY29sb3I9J2hpZ2hsaWdodC1zb2Z0JyBjeD0nMTgwJyBjeT0nNjUwJyByPScyNTAnIGZpbGw9JyMxZDliZjAnIG9wYWNpdHk9JzAuMTAnLz48cmVjdCB4PSc4OCcgeT0nOTYnIHdpZHRoPScxMDI0JyBoZWlnaHQ9JzYwOCcgcng9JzQyJyBmaWxsPScjZmZmZmZmJyBvcGFjaXR5PScwLjc4JyBmaWx0ZXI9J3VybCgjc2hhZG93KScvPjxyZWN0IHg9JzEzOCcgeT0nMTU4JyB3aWR0aD0nNDI2JyBoZWlnaHQ9JzMwMCcgcng9JzMwJyBmaWxsPSd1cmwoI2FjY2VudCknIG9wYWNpdHk9JzAuOTUnLz48cGF0aCBkPSdNMTg4IDM4OCBDMjc1IDMwMiAzNTcgNDI2IDQzOCAzMjYgQzQ4MiAyNzIgNTI0IDI3OCA1NjAgMjM4JyBmaWxsPSdub25lJyBzdHJva2U9J3doaXRlJyBzdHJva2Utd2lkdGg9JzI0JyBzdHJva2UtbGluZWNhcD0ncm91bmQnIG9wYWNpdHk9JzAuNzQnLz48Y2lyY2xlIGN4PScyNTYnIGN5PScyNDYnIHI9JzQ4JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nMC44NScvPjxyZWN0IGRhdGEtYWktY29sb3I9J2hpZ2hsaWdodCcgeD0nNjI2JyB5PScxNzQnIHdpZHRoPSczNzInIGhlaWdodD0nMzQnIHJ4PScxNycgZmlsbD0nIzBmOWY5Nicgb3BhY2l0eT0nMC4yMCcvPjxyZWN0IHg9JzYyNicgeT0nMjUwJyB3aWR0aD0nNDM2JyBoZWlnaHQ9JzI2JyByeD0nMTMnIGZpbGw9JyMwZjE3MmEnIG9wYWNpdHk9JzAuMTAnLz48cmVjdCB4PSc2MjYnIHk9JzMwNCcgd2lkdGg9JzMyOCcgaGVpZ2h0PScyNicgcng9JzEzJyBmaWxsPScjMGYxNzJhJyBvcGFjaXR5PScwLjEwJy8+PHJlY3QgeD0nNjI2JyB5PSc2MzgnIHdpZHRoPScxOTInIGhlaWdodD0nNDYnIHJ4PScyMycgZmlsbD0ndXJsKCNhY2NlbnQpJy8+PHRleHQgZGF0YS1yb2xlPSdzdWJ0aXRsZScgZm9udC1mYW1pbHk9J0FyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9JzIyJyBmb250LXdlaWdodD0nODAwJyBmaWxsPScjMGY5Zjk2Jz48dHNwYW4geD0nNjI2JyB5PScxOTInIHRleHRMZW5ndGg9JzQxOScgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nQW5kR2x5cGhzJz5BY2NvdW50aW5nIGluIER1cmJhbiwgU291dGggQWZyaWNhPC90c3Bhbj48L3RleHQ+PHRleHQgZGF0YS1yb2xlPSdidXNpbmVzcy1uYW1lJyBmb250LWZhbWlseT0nQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nNDgnIGZvbnQtd2VpZ2h0PSc4MDAnIGZpbGw9JyMxMDIwMzMnPjx0c3BhbiB4PSc2MjYnIHk9JzM4OCcgdGV4dExlbmd0aD0nMzg3JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmdBbmRHbHlwaHMnPlRoZSBGb3VuZGVyJ3M8L3RzcGFuPjx0c3BhbiB4PSc2MjYnIHk9JzQ0NicgdGV4dExlbmd0aD0nMjY4JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmdBbmRHbHlwaHMnPkFyY2hpdGVjdDwvdHNwYW4+PC90ZXh0Pjx0ZXh0IGRhdGEtcm9sZT0nZGV0YWlsJyBmb250LWZhbWlseT0nQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjQnIGZvbnQtd2VpZ2h0PSc2MDAnIGZpbGw9JyM0NzU0NjcnPjx0c3BhbiB4PSc2MjYnIHk9JzU1MCcgdGV4dExlbmd0aD0nNDMwJyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmdBbmRHbHlwaHMnPkFjY291bnRpbmcgfCAxNyBFcnNraW5lIFRlcnJhY2UsPC90c3Bhbj48dHNwYW4geD0nNjI2JyB5PSc1NzknIHRleHRMZW5ndGg9JzQwMycgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nQW5kR2x5cGhzJz5BZGRpbmd0b24gQmVhY2gsIER1cmJhbiwgNDAwMSw8L3RzcGFuPjx0c3BhbiB4PSc2MjYnIHk9JzYwOCcgdGV4dExlbmd0aD0nMTYxJyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmdBbmRHbHlwaHMnPlNvdXRoIEFmcmljYTwvdHNwYW4+PC90ZXh0Pjwvc3ZnPg==" alt="Generated banner image for The Founder&#x27;s Architect">
             <div class="hero-card-body">
               <p class="fw-bold mb-3">Serving Durban, South Africa</p>
               <div class="floating-chip">Accounting</div><div class="floating-chip">17 Erskine Terrace, Addington Beach, Durban, 4001, South Africa</div><div class="floating-chip">Google Maps</div><div class="floating-chip">Public lead context</div>
@@ -555,30 +600,106 @@
 </aside>
 
 
-<script id="ai-site-theme-widget-script">
+<script id="ai-site-theme-widget-script" data-ai-site-theme-version="3">
   window.addEventListener("DOMContentLoaded", function () {
     var storageKey = "ai-site-factory-theme-v2";
     var defaults = { text: "#102033", background: "#f8fbff", highlight: "#0f9f96" };
     var root = document.documentElement;
+    function normalizeHex(value, fallback) {
+      return /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback;
+    }
+    function rgb(hex) {
+      var value = parseInt(hex.slice(1), 16);
+      return [(value >> 16) & 255, (value >> 8) & 255, value & 255];
+    }
+    function mix(hex, target, amount) {
+      var sourceRgb = rgb(hex);
+      var targetRgb = rgb(target);
+      var channels = sourceRgb.map(function (channel, index) {
+        return Math.round(channel + (targetRgb[index] - channel) * amount);
+      });
+      return "#" + channels.map(function (channel) {
+        return channel.toString(16).padStart(2, "0");
+      }).join("");
+    }
+    function luminance(hex) {
+      return rgb(hex).map(function (channel) {
+        var value = channel / 255;
+        return value <= 0.04045 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+      }).reduce(function (total, value, index) {
+        return total + value * [0.2126, 0.7152, 0.0722][index];
+      }, 0);
+    }
+    function contrast(first, second) {
+      var brighter = Math.max(luminance(first), luminance(second));
+      var darker = Math.min(luminance(first), luminance(second));
+      return (brighter + 0.05) / (darker + 0.05);
+    }
+    function decodeSvgDataUri(source) {
+      try {
+        var payload = source.split(",", 2)[1] || "";
+        var binary = atob(payload);
+        var bytes = Uint8Array.from(binary, function (character) { return character.charCodeAt(0); });
+        return new TextDecoder().decode(bytes);
+      } catch (error) {
+        return "";
+      }
+    }
+    function encodeSvgDataUri(svg) {
+      var bytes = new TextEncoder().encode(svg);
+      var binary = "";
+      bytes.forEach(function (value) { binary += String.fromCharCode(value); });
+      return "data:image/svg+xml;base64," + btoa(binary);
+    }
+    function recolorFallbackImages(highlight, highlightSoft) {
+      document.querySelectorAll('img[src^="data:image/svg+xml;base64,"]').forEach(function (image) {
+        var template = image.aiSiteFallbackSvgTemplate;
+        if (!template) {
+          template = decodeSvgDataUri(image.getAttribute("src") || "");
+          if (!template.includes("ai-site-fallback-image-v2")) return;
+          image.aiSiteFallbackSvgTemplate = template;
+        }
+        var documentValue = new DOMParser().parseFromString(template, "image/svg+xml");
+        if (documentValue.querySelector("parsererror")) return;
+        documentValue.querySelectorAll('[data-ai-color="highlight"]').forEach(function (element) {
+          var attribute = element.tagName.toLowerCase() === "stop" ? "stop-color" : "fill";
+          element.setAttribute(attribute, highlight);
+        });
+        documentValue.querySelectorAll('[data-ai-color="highlight-soft"]').forEach(function (element) {
+          var attribute = element.tagName.toLowerCase() === "stop" ? "stop-color" : "fill";
+          element.setAttribute(attribute, highlightSoft);
+        });
+        image.setAttribute("src", encodeSvgDataUri(new XMLSerializer().serializeToString(documentValue)));
+      });
+    }
     function readTheme() {
       try { return Object.assign({}, defaults, JSON.parse(localStorage.getItem(storageKey) || "{}")); }
       catch (error) { return Object.assign({}, defaults); }
     }
     function applyTheme(theme) {
-      var text = theme.text || defaults.text;
-      var background = theme.background || defaults.background;
-      var highlight = theme.highlight || defaults.highlight;
+      var text = normalizeHex(theme.text, defaults.text);
+      var background = normalizeHex(theme.background, defaults.background);
+      var highlight = normalizeHex(theme.highlight, defaults.highlight);
+      var lightText = "#ffffff";
+      var darkText = "#102033";
+      var onHighlight = contrast(darkText, highlight) >= contrast(lightText, highlight) ? darkText : lightText;
+      var highlightDeep = mix(highlight, onHighlight === darkText ? "#ffffff" : "#000000", onHighlight === darkText ? 0.08 : 0.28);
+      var highlightSoft = mix(highlight, onHighlight === darkText ? "#ffffff" : "#000000", onHighlight === darkText ? 0.24 : 0.08);
       root.style.setProperty("--ai-text", text);
       root.style.setProperty("--ai-background", background);
       root.style.setProperty("--ai-highlight", highlight);
+      root.style.setProperty("--ai-highlight-deep", highlightDeep);
+      root.style.setProperty("--ai-highlight-soft", highlightSoft);
+      root.style.setProperty("--ai-on-highlight", onHighlight);
       root.style.setProperty("--ink", text);
       root.style.setProperty("--dark", text);
       root.style.setProperty("--background", background);
       root.style.setProperty("--template-bg", background);
       root.style.setProperty("--primary", highlight);
-      root.style.setProperty("--secondary", highlight);
-      root.style.setProperty("--accent", highlight);
+      root.style.setProperty("--secondary", highlightSoft);
+      root.style.setProperty("--accent", highlightDeep);
       root.style.setProperty("--template-accent", highlight);
+      recolorFallbackImages(highlight, highlightSoft);
       document.querySelectorAll("[data-theme-color]").forEach(function (input) {
         input.value = theme[input.dataset.themeColor] || defaults[input.dataset.themeColor];
       });
